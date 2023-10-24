@@ -1,0 +1,21 @@
+{
+  "packages": [
+    "python3@latest",
+    "poetry@latest",
+    "julia-bin@1.9",
+    "gnumake@latest",
+    "coreutils-prefixed@latest",
+    "cmake@latest",
+    "stdenv@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null"
+    ],
+    "scripts": {
+      "test": [
+        "echo \"Error: no test specified\" && exit 1"
+      ]
+    }
+  }
+}

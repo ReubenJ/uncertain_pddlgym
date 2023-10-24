@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "uncertain-pddlgym"
+version = "0.1.0"
+description = ""
+authors = ["Reuben Gardos Reid <5456207+ReubenJ@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11,<3.13"
+ipykernel = "^6.26.0"
+pddlgym-planners = {git = "git@github.com:ReubenJ/pddlgym_planners.git"}
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

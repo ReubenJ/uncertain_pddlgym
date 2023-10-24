@@ -1,0 +1,6 @@
+[submodule "robust_pddl/pddlgym"]
+	path = robust_pddl/pddlgym
+	url = https://github.com/ReubenJ/pddlgym
+[submodule "robust_pddl/pddlgym_planners"]
+	path = robust_pddl/pddlgym_planners
+	url = https://github.com/ReubenJ/pddlgym_planners
