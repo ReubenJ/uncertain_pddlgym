@@ -6,7 +6,7 @@ from pddlgym.structs import Literal, Predicate, Type, TypedEntity
 from uncertain_pddlgym.core import ProbabilisticLiteral, UncertainPDDLEnv
 
 
-def test_test():
+def test_uncertain_env():
     dir_path = os.path.dirname(os.path.realpath(__file__))
     domain_file = os.path.join(dir_path, "pddl/sokoban.pddl")
     problem_dir = os.path.join(dir_path, "pddl/test_uncertain_sokoban")
