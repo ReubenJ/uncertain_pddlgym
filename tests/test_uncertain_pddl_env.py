@@ -1,7 +1,9 @@
-from uncertain_pddlgym.core import UncertainPDDLEnv, ProbabilisticLiteral
-from pddlgym.structs import Literal, Predicate, TypedEntity, Type
 import os
+
 import pytest
+from pddlgym.structs import Literal, Predicate, Type, TypedEntity
+
+from uncertain_pddlgym.core import ProbabilisticLiteral, UncertainPDDLEnv
 
 
 def test_test():
@@ -52,7 +54,53 @@ def test_test():
         else:
             which_lit[1] += 1
 
-    print(which_lit)
+
+    for i in range(2):
+        assert which_lit[i] / checks == pytest.approx(
+            uncertainty[0].probabilities[i], abs=0.1
+        )
+
+def test_empty_literal():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    domain_file = os.path.join(dir_path, "pddl/sokoban.pddl")
+    problem_dir = os.path.join(dir_path, "pddl/test_uncertain_sokoban")
+
+    clear = Predicate("clear", 1)
+    location = Type("location")
+    pos_1 = TypedEntity("pos-6-4", location)
+    lit_1 = Literal(predicate=clear, variables=[pos_1])
+
+    uncertainty = [
+        ProbabilisticLiteral(
+            literals=[
+                lit_1,
+                None
+            ],
+            probabilities=[
+                0.5,
+                0.5,
+            ],
+        ),
+    ]
+
+    env = UncertainPDDLEnv(
+        domain_file,
+        problem_dir,
+        uncertainty=uncertainty,
+        raise_error_on_invalid_action=True,
+        dynamic_action_space=True,
+    )
+
+    checks = 100
+
+    which_lit = [0, 0]
+
+    for _ in range(checks):
+        obs, _ = env.reset()
+        if lit_1 in obs.literals:
+            which_lit[0] += 1
+        else:
+            which_lit[1] += 1
 
     for i in range(2):
         assert which_lit[i] / checks == pytest.approx(

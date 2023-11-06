@@ -1,7 +1,7 @@
-from pddlgym import sokoban_render
-from gym.envs.registration import register
-
 import os
+
+from gym.envs.registration import register
+from pddlgym import sokoban_render
 
 
 def register_pddl_env(name, is_test_env, other_args):

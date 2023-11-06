@@ -9,7 +9,7 @@ from pddlgym.structs import Literal
 
 @dataclass
 class ProbabilisticLiteral:
-    literals: list[Literal] | Literal
+    literals: list[Optional[Literal]] | Literal
     probabilities: float
 
     def __init__(self, literals, probabilities):
@@ -33,10 +33,11 @@ class UncertainPDDLEnv(PDDLEnv):
             for problem in self.problems:
                 for uncertain_set in self.uncertainty:
                     for literal in uncertain_set.literals:
-                        if literal in problem.initial_state:
-                            problem.initial_state = problem.initial_state - {literal}
-                        assert all(var in problem.objects for var in literal.variables)
-                        assert literal.predicate in problem.predicates
+                        if literal is not None:
+                            if literal in problem.initial_state:
+                                problem.initial_state = problem.initial_state - {literal}
+                            assert all(var in problem.objects for var in literal.variables)
+                            assert literal.predicate in problem.predicates
 
         self.problems_initial = deepcopy(self.problems)
 
@@ -47,7 +48,8 @@ class UncertainPDDLEnv(PDDLEnv):
             chosen_literal = np.random.choice(
                 uncertain_set.literals, p=uncertain_set.probabilities
             )
-            for problem in self.problems:
-                problem.initial_state = problem.initial_state.union({chosen_literal})
+            if chosen_literal is not None:
+                for problem in self.problems:
+                    problem.initial_state = problem.initial_state.union({chosen_literal})
 
         return super().reset()
