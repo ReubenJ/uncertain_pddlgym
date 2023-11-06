@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11,<3.13"
 ipykernel = "^6.26.0"
 pddlgym-planners = {git = "git@github.com:ReubenJ/pddlgym_planners.git"}
+pddlgym = {git = "git@github.com:ReubenJ/pddlgym.git"}
 
 
 [tool.poetry.group.dev.dependencies]
