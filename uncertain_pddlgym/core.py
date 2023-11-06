@@ -26,13 +26,14 @@ class UncertainPDDLEnv(PDDLEnv):
         super().__init__(*args, **kwargs)
         self.uncertainty = uncertainty
 
-        for problem in self.problems:
-            for uncertain_set in self.uncertainty:
-                for literal in uncertain_set.literals:
-                    if literal in problem.initial_state:
-                        problem.initial_state = problem.initial_state - {literal}
-                    assert all(var in problem.objects for var in literal.variables)
-                    assert literal.predicate in problem.predicates
+        if self.uncertainty is not None:
+            for problem in self.problems:
+                for uncertain_set in self.uncertainty:
+                    for literal in uncertain_set.literals:
+                        if literal in problem.initial_state:
+                            problem.initial_state = problem.initial_state - {literal}
+                        assert all(var in problem.objects for var in literal.variables)
+                        assert literal.predicate in problem.predicates
 
         self.problems_initial = deepcopy(self.problems)
 

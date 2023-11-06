@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "uncertain-pddlgym"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Reuben Gardos Reid <5456207+ReubenJ@users.noreply.github.com>"]
 readme = "README.md"
