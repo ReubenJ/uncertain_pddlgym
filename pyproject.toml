@@ -13,6 +13,8 @@ pddlgym-planners = {git = "git@github.com:ReubenJ/pddlgym_planners.git"}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
+ruff = "^0.1.4"
+isort = "^5.12.0"
 
 [build-system]
 requires = ["poetry-core"]

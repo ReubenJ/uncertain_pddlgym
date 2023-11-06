@@ -1,10 +1,11 @@
-from pddlgym.core import PDDLEnv
+from copy import deepcopy
 from dataclasses import dataclass
-from pddlgym.structs import Literal
+from typing import Optional
 
 import numpy as np
+from pddlgym.core import PDDLEnv
+from pddlgym.structs import Literal
 
-from copy import deepcopy
 
 @dataclass
 class ProbabilisticLiteral:
@@ -14,7 +15,7 @@ class ProbabilisticLiteral:
     def __init__(self, literals, probabilities):
         if not isinstance(literals, list):
             literals = [literals]
-        
+
         assert sum(probabilities) == 1
 
         self.literals = literals
@@ -22,7 +23,9 @@ class ProbabilisticLiteral:
 
 
 class UncertainPDDLEnv(PDDLEnv):
-    def __init__(self, *args, uncertainty: list[ProbabilisticLiteral]=None, **kwargs):
+    def __init__(
+        self, *args, uncertainty: Optional[list[ProbabilisticLiteral]] = None, **kwargs
+    ):
         super().__init__(*args, **kwargs)
         self.uncertainty = uncertainty
 
@@ -37,13 +40,13 @@ class UncertainPDDLEnv(PDDLEnv):
 
         self.problems_initial = deepcopy(self.problems)
 
-
-
     def reset(self):
         self.problems = deepcopy(self.problems_initial)
-        
+
         for uncertain_set in self.uncertainty:
-            chosen_literal = np.random.choice(uncertain_set.literals, p=uncertain_set.probabilities)
+            chosen_literal = np.random.choice(
+                uncertain_set.literals, p=uncertain_set.probabilities
+            )
             for problem in self.problems:
                 problem.initial_state = problem.initial_state.union({chosen_literal})
 

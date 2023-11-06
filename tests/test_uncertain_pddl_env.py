@@ -3,6 +3,7 @@ from pddlgym.structs import Literal, Predicate, TypedEntity, Type
 import os
 import pytest
 
+
 def test_test():
     dir_path = os.path.dirname(os.path.realpath(__file__))
     domain_file = os.path.join(dir_path, "pddl/sokoban.pddl")
@@ -18,19 +19,25 @@ def test_test():
     lit_2 = Literal(predicate=at_predicate, variables=[player, pos_2])
 
     uncertainty = [
-        ProbabilisticLiteral(literals=[
-            lit_1,
-            lit_2,
-        ], probabilities=[
-            0.4,
-            0.6,
-        ]),
+        ProbabilisticLiteral(
+            literals=[
+                lit_1,
+                lit_2,
+            ],
+            probabilities=[
+                0.4,
+                0.6,
+            ],
+        ),
     ]
 
-    env = UncertainPDDLEnv(domain_file, problem_dir,
-                           uncertainty=uncertainty,
-                           raise_error_on_invalid_action=True,
-                           dynamic_action_space=True)
+    env = UncertainPDDLEnv(
+        domain_file,
+        problem_dir,
+        uncertainty=uncertainty,
+        raise_error_on_invalid_action=True,
+        dynamic_action_space=True,
+    )
 
     checks = 100
 
@@ -48,4 +55,6 @@ def test_test():
     print(which_lit)
 
     for i in range(2):
-        assert which_lit[i] / checks == pytest.approx(uncertainty[0].probabilities[i], abs=0.1)
+        assert which_lit[i] / checks == pytest.approx(
+            uncertainty[0].probabilities[i], abs=0.1
+        )
