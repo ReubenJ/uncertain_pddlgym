@@ -4,33 +4,33 @@
         dir-left - direction
         dir-right - direction
         dir-up - direction
-        player-01 - player
-        pos-1-1 - position
-        pos-1-2 - position
-        pos-1-3 - position
-        pos-1-4 - position
-        pos-1-5 - position
-        pos-2-1 - position
-        pos-2-2 - position
-        pos-2-3 - position
-        pos-2-4 - position
-        pos-2-5 - position
-        pos-3-1 - position
-        pos-3-2 - position
-        pos-3-3 - position
-        pos-3-4 - position
-        pos-3-5 - position
-        pos-4-1 - position
-        pos-4-2 - position
-        pos-4-3 - position
-        pos-4-4 - position
-        pos-4-5 - position
-        pos-5-1 - position
-        pos-5-2 - position
-        pos-5-3 - position
-        pos-5-4 - position
-        pos-5-5 - position
-        stone-01 - stone
+        player-01 - thing
+        pos-1-1 - location
+        pos-1-2 - location
+        pos-1-3 - location
+        pos-1-4 - location
+        pos-1-5 - location
+        pos-2-1 - location
+        pos-2-2 - location
+        pos-2-3 - location
+        pos-2-4 - location
+        pos-2-5 - location
+        pos-3-1 - location
+        pos-3-2 - location
+        pos-3-3 - location
+        pos-3-4 - location
+        pos-3-5 - location
+        pos-4-1 - location
+        pos-4-2 - location
+        pos-4-3 - location
+        pos-4-4 - location
+        pos-4-5 - location
+        pos-5-1 - location
+        pos-5-2 - location
+        pos-5-3 - location
+        pos-5-4 - location
+        pos-5-5 - location
+        stone-01 - thing
     )
     (:goal (at-goal stone-01))
     (:init
